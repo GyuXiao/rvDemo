@@ -40,7 +40,6 @@ class DemoListAdapter: ListAdapter<Item, RecyclerView.ViewHolder>(DemoDiffCallba
     }
 
     private fun setBackgroundRadius(holder: DemoViewHolder, position: Int) {
-        Log.d("Gyu", "${currentList.size}")
         holder.run {
             val entity = getItem(position)
             when(entity.backgroundStyle) {

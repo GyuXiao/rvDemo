@@ -46,11 +46,11 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
                 submitList(resultList)
-                // 这里不应该调用 notifyDataSetChanged，但我又找不到更好的方法
+                // 这里不应该调用 notifyDataSetChanged 来刷新整个列表样式，但我又找不到更好的方法
 //                binding.root.post(this::notifyDataSetChanged)
             }
 
-            Toast.makeText(this, "删了第 1 个", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "删了第 1 项", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -61,12 +61,7 @@ class MainActivity : AppCompatActivity() {
             Item("2", "item2", 3),
             Item("3", "item3",3),
             Item("4", "item4",3),
-            Item("5", "item5",3),
-            Item("6", "item6",3),
-            Item("7", "item7",3),
-            Item("8", "item8",3),
-            Item("9", "item9",3),
-            Item("10", "item10",2)
+            Item("5", "item5", 2)
         )
     }
 }
