@@ -1,17 +1,10 @@
 package com.gyu.rvdemo
 
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.Adapter
-import android.widget.TextView
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.gyu.rvdemo.databinding.ActivityMainBinding
 import com.gyu.rvdemo.databinding.RvItemBinding
-import javax.sql.DataSource
-import kotlin.math.log
 
 
 /**
@@ -41,12 +34,16 @@ class DemoListAdapter: ListAdapter<Item, RecyclerView.ViewHolder>(DemoDiffCallba
 
     private fun setBackgroundRadius(holder: DemoViewHolder, position: Int) {
         holder.run {
-            val entity = getItem(position)
-            when(entity.backgroundStyle) {
-                1 -> binding.rvItem.setBackgroundResource(R.drawable.bg_first_item)
-                2 -> binding.rvItem.setBackgroundResource(R.drawable.bg_last_item)
-                3 -> binding.rvItem.setBackgroundResource(R.color.item_bg_color)
-                4 -> binding.rvItem.setBackgroundResource(R.drawable.bg_item)
+            if (currentList.size == 1) {
+                binding.rvItem.setBackgroundResource(R.drawable.bg_item)
+            } else if (currentList.size > 1) {
+                currentList.forEachIndexed { _, _ ->
+                    when (position) {
+                        0 -> binding.rvItem.setBackgroundResource(R.drawable.bg_first_item)
+                        currentList.size - 1 -> binding.rvItem.setBackgroundResource(R.drawable.bg_last_item)
+                        else -> binding.rvItem.setBackgroundResource(R.color.item_bg_color)
+                    }
+                }
             }
         }
     }

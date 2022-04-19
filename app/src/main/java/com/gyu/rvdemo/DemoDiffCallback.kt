@@ -14,6 +14,7 @@ open class DemoDiffCallback : DiffUtil.ItemCallback<Item>() {
     }
 
     override fun areContentsTheSame(oldItem: Item, newItem: Item): Boolean {
-        return oldItem == newItem
+        // 不懂，为什么写死返回 false ，就达到预期了
+        return false
     }
 }

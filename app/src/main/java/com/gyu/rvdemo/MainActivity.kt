@@ -31,21 +31,9 @@ class MainActivity : AppCompatActivity() {
 
         findViewById<Button>(R.id.btn_delete_first).setOnClickListener {
             demoListAdapter.run {
-                val filterList = currentList.filter { it.id != "1" }
-                val resultList = mutableListOf<Item>()
-                filterList?.let { resultList.addAll(it) }
-                if (resultList.size == 1) {
-                    resultList.forEach { it.backgroundStyle = 4 }
-                } else if (resultList.size > 1) {
-                    resultList.forEachIndexed { index, item ->
-                        when(index) {
-                            0 -> item.backgroundStyle = 1
-                            resultList.size - 1 -> item.backgroundStyle = 2
-                            else -> item.backgroundStyle = 3
-                        }
-                    }
-                }
-                submitList(resultList)
+                val filterList = currentList.map { it.copy() }.toMutableList()
+
+                submitList(filterList.filter { it.id != "1" })
                 // 这里不应该调用 notifyDataSetChanged 来刷新整个列表样式，但我又找不到更好的方法
 //                binding.root.post(this::notifyDataSetChanged)
             }
@@ -57,11 +45,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun getDataList(): ArrayList<Item> {
         return arrayListOf<Item>(
-            Item("1", "item1", 1),
-            Item("2", "item2", 3),
-            Item("3", "item3",3),
-            Item("4", "item4",3),
-            Item("5", "item5", 2)
+            Item("1", "item1"),
+            Item("2", "item2"),
+            Item("3", "item3"),
+            Item("4", "item4"),
+            Item("5", "item5")
         )
     }
 }
